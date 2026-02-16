@@ -1,25 +1,34 @@
 import { useNavigate } from "react-router-dom";
-import useFetchProducts from "../hooks/useFetchProdutcs";
+// import useFetchProducts from "../hooks/useFetchProdutcs";
 import type { ProductType } from "../data/types";
 import ActionComponent from "./actionComponent";
 import { FilterByCategory } from "../utils/filterByCtegory";
 import { SortProducts } from "../utils/sortProducts";
 import { FilterBySearch } from "../utils/filterBySearch";
 
-import { Card, Row, Col, Image, Flex, Tag, Space, Typography, Button } from "antd";
-import { TableOutlined, BarsOutlined } from '@ant-design/icons';
+import { Card, Image, Flex, Tag, Space, Typography, Radio } from "antd";
+import { TableOutlined, BarsOutlined } from "@ant-design/icons";
 import { useState, useMemo } from "react";
 
-const { Title, Paragraph, Text } = Typography;
-function ProductsPage() {
-    const navigate = useNavigate();
+import "./productsPage.css"
 
-    const { products, loading, error } = useFetchProducts();
+const { Title, Paragraph, Text } = Typography;
+
+interface Props {
+    products: ProductType[];
+    loading: boolean;
+    error: string;
+}
+
+function ProductsPage({ products, loading, error }: Props) {
+    const navigate = useNavigate();
+    // const { products, loading, error } = useFetchProducts();
 
     const [search, setSearch] = useState("");
     const [order, setOrder] = useState("title-asc");
     const [category, setCategory] = useState("All Category");
 
+    const [layout, setLayout] = useState<"horizontal" | "vertical">("horizontal");
 
     const filteredProducts = useMemo(() => {
         let result = products;
@@ -28,20 +37,27 @@ function ProductsPage() {
         result = FilterByCategory(result, category);
         result = SortProducts(result, order);
 
-
         return result;
-    }, [products, search, order, category])
+    }, [products, search, order, category]);
+
+    //console.log(products)
 
     if (loading) return <h3>Loading...</h3>;
     if (error) return <h3>Error.. {error}</h3>;
 
     return (
         <>
-            <Flex style={{
-                padding: "16px",
-            }} >
 
-                <div style={{ width: "95%" }}>
+            <Flex
+                style={{
+                    padding: 16,
+                    gap: 16,
+                }}
+                justify="space-between"
+                align="center"
+            >
+
+                <Flex className="actionComponents">
                     <ActionComponent
                         search={search}
                         setSearch={setSearch}
@@ -50,49 +66,56 @@ function ProductsPage() {
                         order={order}
                         setOrder={setOrder}
                     />
-                </div>
+                </Flex>
 
-                <Space>
-                    <Button
-                        size="large"
-                        style={{ height: 40 }}
-                        icon={<TableOutlined />}
-                    />
+                <Radio.Group
+                    value={layout}
+                    onChange={(e) => setLayout(e.target.value)}
+                    optionType="button"
+                    buttonStyle="solid"
+                >
+                    <Radio.Button value="horizontal">
+                        <TableOutlined />
+                    </Radio.Button>
 
-                    <Button
-                        size="large"
-                        style={{ height: 40 }}
-                        icon={<BarsOutlined />}
-                    />
-                </Space>
+                    <Radio.Button value="vertical">
+                        <BarsOutlined />
+                    </Radio.Button>
+                </Radio.Group>
             </Flex>
 
-            <Row gutter={[16, 16]}>
+            <Flex
+                wrap="wrap"
+                gap={16}
+                vertical={layout === "vertical"}
+                style={{ padding: 16, width: "100%" }}
+            >
                 {filteredProducts.map((item: ProductType) => (
-                    <Col
+                    <Flex
                         key={item.id}
-                        xs={24}
-                        sm={24}
-                        md={12}
-                        lg={12}
-                        xl={12}
+                        style={{
+                            width: layout === "horizontal" ? "calc(50% - 8px)" : "100%",
+                        }}
                     >
-
                         <Card
                             hoverable
                             style={{ width: "100%", height: "100%" }}
-                            bodyStyle={{ display: "flex", flexDirection: "column" }}
+                            bodyStyle={{
+                                display: "flex",
+                                flexDirection: "column",
+                            }}
                             onClick={() => navigate(`/products/${item.id}`)}
                             cover={
-
                                 <Image
-
                                     alt={item.title}
                                     src={item.image}
-                                    style={{ height: 220, objectFit: "contain", padding: 10 }}
-
+                                    preview={false}
+                                    style={{
+                                        height: 220,
+                                        objectFit: "contain",
+                                        padding: 10,
+                                    }}
                                 />
-
                             }
                         >
                             <Space direction="vertical" size={10} style={{ width: "100%" }}>
@@ -113,9 +136,9 @@ function ProductsPage() {
                                 </Paragraph>
                             </Space>
                         </Card>
-                    </Col>
+                    </Flex>
                 ))}
-            </Row>
+            </Flex>
         </>
     );
 }
