@@ -13,7 +13,7 @@ import { deleteProduct, updateProduct } from "../api/productsApi";
 import {
     Button,
     Card,
-    Col,
+  
     Divider,
     Row,
     Space,
