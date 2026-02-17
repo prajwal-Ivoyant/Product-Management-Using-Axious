@@ -2,6 +2,8 @@ import { Select, Input, Flex } from "antd";
 
 const { Search } = Input;
 
+import { ProductCategory, SortOrder } from "../utils/enums";
+
 type ActionComponentProps = {
     search: string;
     setSearch: React.Dispatch<React.SetStateAction<string>>;
@@ -21,6 +23,17 @@ function ActionComponent({
     order,
     setOrder,
 }: ActionComponentProps) {
+
+    const categoryOptions = Object.values(ProductCategory).map((val) => ({
+        value: val,
+        label: val,
+    }));
+
+    const sortOptions = Object.values(SortOrder).map((val) => ({
+        value: val,
+        label: val,
+    }));
+
     return (
         <Flex gap="middle" align="center" style={{ width: "100%" }}>
             <Search
@@ -39,13 +52,7 @@ function ActionComponent({
                 size="large"
                 style={{ width: "20%" }}
                 onChange={(val) => setCategory(val)}
-                options={[
-                    { value: "All Category", label: "All Category" },
-                    { value: "Men's Clothing", label: "Men's Clothing" },
-                    { value: "Electronics", label: "Electronics" },
-                    { value: "Jewelery", label: "Jewelery" },
-                    { value: "Women's Clothing", label: "Women's Clothing" },
-                ]}
+                options={categoryOptions}
             />
 
             <Select
@@ -53,12 +60,7 @@ function ActionComponent({
                 size="large"
                 style={{ width: "20%" }}
                 onChange={(val) => setOrder(val)}
-                options={[
-                    { value: "title-asc", label: "Title (A-Z)" },
-                    { value: "title-desc", label: "Title (Z-A)" },
-                    { value: "price-asc", label: "Price (Low to High)" },
-                    { value: "price-desc", label: "Price (High to Low)" },
-                ]}
+                options={sortOptions}
             />
         </Flex>
     );
