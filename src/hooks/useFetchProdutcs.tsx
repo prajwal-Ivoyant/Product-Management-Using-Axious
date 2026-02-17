@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { getAllProducts } from "../api/productsApi";
-import { getSingleProduct } from '../api/productsApi';
+//import { getSingleProduct } from '../api/productsApi';
+
+import { getProductsFromLS, initProductsToLS, } from "../utils/productsLocalStorage";
 
 import type { ProductType } from "../data/types";
 
-function useFetchProducts(id?: number) {
+function useFetchProducts() {
     const [products, setProducts] = useState<ProductType[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -14,9 +16,24 @@ function useFetchProducts(id?: number) {
             setLoading(true);
             setError("");
 
-            // both one product n list of products
-            const res = id ? await getSingleProduct(id) : await getAllProducts();
+            // 1) Check localStorage first
+            const lsProducts = getProductsFromLS();
+
+            // If LS already has products -> use it
+            if (lsProducts.length > 0) {
+                setProducts(lsProducts);
+                return;
+            }
+
+            // 2) Else fetch from API
+            const res = await getAllProducts();
+
+            // 3) Save to localStorage (only first time)
+            initProductsToLS(res.data);
+
+            // 4) Set state
             setProducts(res.data);
+
         } catch (err) {
             setError("Something went wrong");
         } finally {

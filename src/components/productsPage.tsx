@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 // import useFetchProducts from "../hooks/useFetchProdutcs";
 import type { ProductType } from "../data/types";
 import ActionComponent from "./actionComponent";
+
 import { FilterByCategory } from "../utils/filterByCtegory";
 import { SortProducts } from "../utils/sortProducts";
 import { FilterBySearch } from "../utils/filterBySearch";
@@ -125,7 +126,7 @@ function ProductsPage({ products, loading, error }: Props) {
 
                                 <Flex justify="space-between" align="center">
                                     <Text strong style={{ fontSize: 20 }}>
-                                        ${item.price}
+                                        ₹{item.price}
                                     </Text>
 
                                     <Tag>{item.category}</Tag>

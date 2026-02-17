@@ -1,45 +1,170 @@
 .singleProductLayout {
-    padding: 30px;
-    max-width: 1300px;
-    margin: auto;
+    min-height: 100vh;
+    background: var(--cream);
+    padding: 22px 28px 60px;
 }
 
+.topBar {
+    padding: 18px 6px 14px;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.08);
+    margin-bottom: 22px;
+}
+
+.topBar .ant-btn-link {
+    color: #0b5cff !important;
+    font-weight: 700;
+    padding-left: 0 !important;
+}
+
+/* Main card */
 .productCard {
-    border-radius: 14px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    border-radius: 28px !important;
+    border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    overflow: hidden;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.08);
 }
 
+.productCard .ant-card-body {
+    padding: 0 !important;
+}
+
+/* Layout */
 .productFlex {
-    gap: 25px;
-    flex-wrap: wrap;
+    gap: 0;
+    align-items: stretch;
 }
 
+/* Left panel */
 .productImageBox {
-    width: 280px;
+    width: 42%;
+    min-width: 340px;
+    background: rgba(247, 244, 238, 0.92);
+    border-right: 1.5px solid rgba(0, 0, 0, 0.08);
+    padding: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .productImage {
     width: 100% !important;
-    border-radius: 14px;
+    height: 440px !important;
+    object-fit: contain;
 }
 
+/* Right panel */
 .productDetails {
     flex: 1;
-    min-width: 280px;
+    padding: 34px 40px;
+}
+
+/* Pills */
+.metaRow {
+    margin-bottom: 12px !important;
+}
+
+.categoryPill,
+.idPill {
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-weight: 900;
+    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.75);
+}
+
+.categoryPill {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0b5cff !important;
+}
+
+.idPill {
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.65);
+    border-color: rgba(0, 0, 0, 0.08);
+    color: rgba(0, 0, 0, 0.65);
+}
+
+/* Title + Price */
+.productDetails h2.ant-typography {
+    font-family: "Playfair Display", serif;
+    font-weight: 900;
+    font-size: 44px;
+    line-height: 1.05;
+    margin-bottom: 18px !important;
 }
 
 .priceText {
-    color: #1677ff !important;
-    margin-top: 0px !important;
+    font-family: "Playfair Display", serif !important;
+    font-size: 46px !important;
+    font-weight: 900 !important;
+    color: var(--orange) !important;
+    margin: 0 0 22px 0 !important;
+}
+
+/* Description */
+.productDetails strong {
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.35);
 }
 
 .descText {
     margin-top: 10px;
     font-size: 15px;
-    color: #555;
+    line-height: 1.85;
+    color: rgba(0, 0, 0, 0.7);
 }
 
-.infoCard {
-    border-radius: 12px !important;
-    background: #fafafa !important;
+.productDetails .ant-divider {
+    border-color: rgba(0, 0, 0, 0.08);
+    margin: 28px 0 22px;
+}
+
+/* Edit mode form */
+.singleProductLayout .ant-form-item-label>label {
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+}
+
+.singleProductLayout .ant-input,
+.singleProductLayout .ant-input-number,
+.singleProductLayout .ant-select-selector {
+    height: 50px !important;
+    border-radius: 16px !important;
+    border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
+    background: rgba(247, 244, 238, 0.6) !important;
+    box-shadow: none !important;
+}
+
+.singleProductLayout textarea.ant-input {
+    min-height: 150px !important;
+    padding: 14px !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .productFlex {
+        flex-direction: column;
+    }
+
+    .productImageBox {
+        width: 100%;
+        min-width: unset;
+        border-right: none;
+        border-bottom: 1.5px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .productDetails {
+        padding: 24px;
+    }
+
+    .productDetails h2.ant-typography {
+        font-size: 34px;
+    }
 }
