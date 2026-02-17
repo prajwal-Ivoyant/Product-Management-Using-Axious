@@ -1,16 +1,9 @@
 .productsLayout {
     min-height: 100vh;
-    background: var(--cream);
 }
 
-/* Header */
-.productsHeader {
-    height: 74px !important;
-    padding: 0 26px !important;
-    background: linear-gradient(180deg, #0f0f0f 0%, #151515 100%) !important;
-    border-bottom: 1.5px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    align-items: center;
+.ant-layout-header {
+    background-color: #ffffff;
 }
 
 .productsHeaderInner {
@@ -19,19 +12,12 @@
 
 /* Brand */
 .brand {
-    font-family: "Playfair Display", serif;
     font-size: 14px;
     font-weight: 900;
     letter-spacing: 0.4px;
-    color: #fff;
     margin: 0;
 }
 
-.brand span {
-    color: var(--orange);
-}
-
-/* Buttons */
 .headerBtns {
     display: flex;
     align-items: center;
@@ -50,22 +36,13 @@
     transform: translateY(-1px);
 }
 
-/* Reset */
-.btnReset {
-    background: rgba(255, 255, 255, 0.06) !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
-    color: #fff !important;
-}
-
 .btnReset:hover {
     border-color: rgba(255, 255, 255, 0.35) !important;
 }
 
 /* Add */
 .btnAdd {
-    background: var(--orange) !important;
     border: 1.5px solid rgba(0, 0, 0, 0.3) !important;
-    color: #fff !important;
     box-shadow: 0 16px 40px rgba(242, 107, 43, 0.3);
 }
 
@@ -74,14 +51,7 @@
 }
 
 /* Content + Footer */
-.productsLayout .ant-layout-content {
-    background: var(--cream);
-    padding: 0;
-}
-
 .productsLayout .ant-layout-footer {
-    background: linear-gradient(180deg, #0f0f0f 0%, #151515 100%) !important;
     border-top: 1.5px solid rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.45);
     padding: 18px 26px !important;
 }

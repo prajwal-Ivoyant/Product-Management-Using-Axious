@@ -1,10 +1,10 @@
 import React from "react";
-import { Modal, Form, Input, InputNumber, Select, message } from "antd";
+import { Modal, Form, Input, InputNumber, Select, message, Divider } from "antd";
 import type { ProductType } from "../data/types";
 
 import { addProductToLS } from "../utils/productsLocalStorage";
 import { addProduct } from "../api/productsApi";
-import "./addNewProduct.css"
+import "./addNewProduct.css";
 
 const { TextArea } = Input;
 
@@ -26,12 +26,10 @@ const AddNewProduct = ({ isModalOpen, setIsModalOpen, setItems }: Props) => {
         try {
             const values = await form.validateFields();
 
-            const res = await addProduct(values)
-            //console.log(res)
-            // 👇 Add to LocalStorage (REAL persistence)
+            const res = await addProduct(values);
+
             const newProduct = addProductToLS(res.data);
-            console.log(newProduct)
-            // 👇 Update UI instantly
+
             setItems((prev) => [newProduct, ...prev]);
 
             message.success("Product added successfully!");
@@ -49,8 +47,10 @@ const AddNewProduct = ({ isModalOpen, setIsModalOpen, setItems }: Props) => {
             onOk={handleOk}
             onCancel={handleCancel}
             okText="Add Product"
+            className="addProductModal"
         >
-            <Form form={form} layout="vertical">
+
+            <Form form={form} layout="vertical" className="addProductForm">
                 <Form.Item
                     label="Title"
                     name="title"
@@ -107,6 +107,7 @@ const AddNewProduct = ({ isModalOpen, setIsModalOpen, setItems }: Props) => {
                     <Input placeholder="https://example.com/image.png" />
                 </Form.Item>
             </Form>
+            <Divider />
         </Modal>
     );
 };

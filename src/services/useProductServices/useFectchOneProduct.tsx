@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-import { getProductsFromLS } from '../utils/productsLocalStorage';
-import { getSingleProduct } from '../api/productsApi';
+import { getProductsFromLS } from '../../utils/productsLocalStorage';
+import { getSingleProduct } from '../../api/productsApi';
 
-import type { ProductType } from '../data/types';
+import type { ProductType } from '../../data/types';
 
 function useFectchOneProduct(id: number) {
   const [product, setProduct] = useState<ProductType>();
