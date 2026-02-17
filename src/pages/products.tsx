@@ -1,84 +1,88 @@
-import { useState, useEffect } from 'react';
-import ProductsPage from '../components/productsPage';
-import { Button } from 'antd';
-import AddNewProduct from '../components/addNewProduct';
+import { useState, useEffect } from "react";
+import ProductsPage from "../components/productsPage";
+import AddNewProduct from "../components/addNewProduct";
 import useFetchProducts from "../hooks/useFetchProdutcs";
 
+import { clearProductsLS } from "../utils/productsLocalStorage";
 
+import { Button, Flex, Layout, message, Modal, Typography } from "antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
 
-import { Flex, Layout } from 'antd';
-import type { ProductType } from '../data/types';
+const { Title } = Typography;
+
+import type { ProductType } from "../data/types";
+
+import "./products.css"
 
 const { Header, Footer, Content } = Layout;
 
-
 function Products() {
-
-    //const STORAGE_KEY = "my_products";
-
-    const { products, loading, error } = useFetchProducts();
+    const { products, loading, error, refetch } = useFetchProducts();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [items, setItems] = useState<ProductType[]>(products)
-
-
-    // // ✅ load initial items from localStorage
-    // const [items, setItems] = useState<ProductType[]>(() => {
-    //     const saved = localStorage.getItem(STORAGE_KEY);
-    //     return saved ? JSON.parse(saved) : [];
-    // });
-
-    // // ✅ when API products comes first time, store in local storage only if storage empty
-    // useEffect(() => {
-    //     if (products.length > 0 && items.length === 0) {
-    //         setItems(products);
-    //         localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-    //     }
-    // }, [products]);
-
-    // // ✅ every time items changes, save it
-    // useEffect(() => {
-    //     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-    // }, [items]);
+    const [items, setItems] = useState<ProductType[]>(products);
 
     useEffect(() => {
         setItems(products);
     }, [products]);
 
+    const confirmReset = () => {
+        Modal.confirm({
+            title: "Reset products to original?",
+            icon: <ExclamationCircleOutlined />,
+            content:
+                "This will remove all your added, edited, and deleted products. This action cannot be undone.",
+            okText: "Yes, Reset",
+            okType: "danger",
+            cancelText: "Cancel",
 
-    console.log("items : ", items)
-    console.log("products :", products)
+            onOk: async () => {
+                try {
+                    // 1) Clear LS
+                    clearProductsLS();
 
+                    // 2) Refetch (hook will now fetch from API)
+                    await refetch();
+
+                    message.success("Products reset to original!");
+                } catch (err) {
+                    message.error("Reset failed!");
+                }
+            },
+        });
+    };
 
     return (
         <div>
-
             <Flex gap="middle" wrap>
-
                 <Layout>
+                    <Layout className="productsLayout">
+                        <Header className="productsHeader">
+                            <Flex justify="space-between" align="center" className="productsHeaderInner">
 
-                    <Layout>
+                                <Title className="brand">SHOPIFY<span>.</span></Title>
 
-                        <Header>
-                            <Flex justify="space-between" align="center" style={{ width: "100%" }}>
-                                <h1>Products</h1>
 
-                                <Button type="primary" onClick={() => setIsModalOpen(true)}>
-                                    + Add Product
-                                </Button>
+                                <Flex gap={10} className="headerBtns">
+                                    <Button className="btnReset" onClick={confirmReset}>
+                                        Reset
+                                    </Button>
+
+                                    <Button className="btnAdd" onClick={() => setIsModalOpen(true)}>
+                                        + Add Product
+                                    </Button>
+                                </Flex>
                             </Flex>
                         </Header>
+
 
                         <Content>
                             <ProductsPage products={items} loading={loading} error={error} />
                         </Content>
 
-                        <Footer >Footer</Footer>
-
+                        <Footer>Footer</Footer>
                     </Layout>
-
                 </Layout>
-
             </Flex>
 
             {isModalOpen && (
@@ -88,10 +92,8 @@ function Products() {
                     setItems={setItems}
                 />
             )}
-
-
         </div>
-    )
+    );
 }
 
-export default Products
+export default Products;

@@ -6,4 +6,4 @@ export const getSingleProduct = (id: number) => api.get(`/products/${id}`);
 
 export const addProduct = (data: ProductType) => api.post('/products', data)
 export const updateProduct = (id: number, data: ProductType) => api.put(`/products/${id}`, data);
-export const deletProduct = (id: number) => api.delete(`/products/${id}`);
+export const deleteProduct = (id: number) => api.delete(`/products/${id}`);

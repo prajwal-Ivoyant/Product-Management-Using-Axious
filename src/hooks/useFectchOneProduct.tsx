@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+
+import { getProductsFromLS } from '../utils/productsLocalStorage';
 import { getSingleProduct } from '../api/productsApi';
 
 import type { ProductType } from '../data/types';
@@ -10,10 +12,21 @@ function useFectchOneProduct(id: number) {
 
   const fetchSingleProducts = async () => {
     try {
-      setLoading(true)
-      setError("")
+      setLoading(true);
+      setError("");
+
+      // 1) First check localStorage
+      const products = getProductsFromLS();
+      const found = products.find((p) => p.id === id);
+
+      if (found) {
+        setProduct(found);
+        return;
+      }
+
+      // 2) fallback to API (only if LS doesn't have it)
       const res = await getSingleProduct(id);
-      setProduct(res.data)
+      setProduct(res.data);
     } catch (err) {
       setError(error)
     } finally {
@@ -28,7 +41,7 @@ function useFectchOneProduct(id: number) {
   console.log()
 
   return (
-    { product, loading, error, reFetch: fetchSingleProducts }
+    { product, loading, error, refetch: fetchSingleProducts }
   )
 }
 

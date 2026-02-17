@@ -1,3 +1,102 @@
+/* Action bar alignment */
 .actionComponents {
-    width: 90%;
+    width: 100%;
+}
+
+.actionComponents>.ant-flex {
+    width: 100% !important;
+    flex-wrap: nowrap !important;
+    gap: 14px !important;
+}
+
+/* Search takes max space */
+.actionComponents .ant-input-search {
+    flex: 1 !important;
+    min-width: 280px;
+}
+
+/* Search button = Add button orange */
+.actionComponents .ant-input-search-button {
+    background: var(--orange) !important;
+    border-color: var(--orange) !important;
+    font-weight: 900 !important;
+}
+
+/* Select width */
+.actionComponents .ant-select {
+    width: 220px !important;
+    min-width: 180px;
+}
+
+/* Select round */
+.actionComponents .ant-select-selector {
+    border-radius: 999px !important;
+    height: 46px !important;
+}
+
+/* Toggle always horizontal */
+.ant-radio-group {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    white-space: nowrap;
+    border-radius: 999px !important;
+    overflow: hidden;
+}
+
+/* Product card look */
+.ant-card {
+    border-radius: 22px !important;
+    overflow: hidden;
+    border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ant-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+}
+
+/* Image area */
+.ant-card-cover {
+    background: rgba(247, 244, 238, 0.9);
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Title font */
+.ant-typography h5,
+.ant-typography h5.ant-typography {
+    font-family: "Playfair Display", serif;
+    font-weight: 900;
+}
+
+/* Price font */
+.ant-typography strong {
+    font-family: "Playfair Display", serif;
+    font-size: 26px;
+    font-weight: 900;
+}
+
+/* Tag pill */
+.ant-tag {
+    border-radius: 999px !important;
+    padding: 6px 12px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .actionComponents>.ant-flex {
+        flex-wrap: wrap !important;
+    }
+
+    .actionComponents .ant-input-search {
+        width: 100% !important;
+        flex: unset !important;
+    }
+
+    .actionComponents .ant-select {
+        width: calc(50% - 7px) !important;
+    }
 }
