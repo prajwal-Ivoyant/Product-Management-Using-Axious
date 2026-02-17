@@ -13,10 +13,6 @@ import { deleteProduct, updateProduct } from "../api/productsApi";
 import {
     Button,
     Card,
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     Divider,
     Row,
     Space,
