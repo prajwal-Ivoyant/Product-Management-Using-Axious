@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import useFectchOneProduct from "../hooks/useFectchOneProduct";
+import useFectchOneProduct from "../services/useProductServices/useFectchOneProduct";
 
 import {
     deleteProductFromLS,
@@ -13,7 +13,6 @@ import { deleteProduct, updateProduct } from "../api/productsApi";
 import {
     Button,
     Card,
-  
     Divider,
     Row,
     Space,
@@ -298,8 +297,10 @@ function SingleProductPage() {
 
                             <Divider />
 
-                            <Button>Buy</Button>
-                            <Button>Add to cart</Button>
+                            <Flex justify="space-evenly">
+                                <Button>Buy</Button>
+                                <Button>Add to cart</Button>
+                            </Flex>
                         </div>
                     </Flex>
                 </Form>

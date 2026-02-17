@@ -15,13 +15,6 @@
     min-width: 280px;
 }
 
-/* Search button = Add button orange */
-.actionComponents .ant-input-search-button {
-    background: var(--orange) !important;
-    border-color: var(--orange) !important;
-    font-weight: 900 !important;
-}
-
 /* Select width */
 .actionComponents .ant-select {
     width: 220px !important;
@@ -48,7 +41,7 @@
     border-radius: 22px !important;
     overflow: hidden;
     border: 1.5px solid rgba(0, 0, 0, 0.12) !important;
-    background: rgba(255, 255, 255, 0.92) !important;
+
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -59,22 +52,7 @@
 
 /* Image area */
 .ant-card-cover {
-    background: rgba(247, 244, 238, 0.9);
     border-bottom: 1.5px solid rgba(0, 0, 0, 0.08);
-}
-
-/* Title font */
-.ant-typography h5,
-.ant-typography h5.ant-typography {
-    font-family: "Playfair Display", serif;
-    font-weight: 900;
-}
-
-/* Price font */
-.ant-typography strong {
-    font-family: "Playfair Display", serif;
-    font-size: 26px;
-    font-weight: 900;
 }
 
 /* Tag pill */

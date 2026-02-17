@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../api/productsApi";
+import { getAllProducts } from "../../api/productsApi";
 //import { getSingleProduct } from '../api/productsApi';
 
-import { getProductsFromLS, initProductsToLS, } from "../utils/productsLocalStorage";
+import { getProductsFromLS, initProductsToLS, } from "../../utils/productsLocalStorage";
 
-import type { ProductType } from "../data/types";
+import type { ProductType } from "../../data/types";
 
 function useFetchProducts() {
     const [products, setProducts] = useState<ProductType[]>([]);

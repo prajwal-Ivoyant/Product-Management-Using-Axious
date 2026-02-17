@@ -95,7 +95,11 @@ function ProductsPage({ products, loading, error }: Props) {
                     <Flex
                         key={item.id}
                         style={{
-                            width: layout === "horizontal" ? "calc(50% - 8px)" : "100%",
+                            width:
+                                layout === "horizontal"
+                                    ? "calc(33.33% - 11px)"
+                                    : "100%",
+
                         }}
                     >
                         <Card
